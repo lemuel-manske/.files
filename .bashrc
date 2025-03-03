@@ -1,7 +1,8 @@
-
 unalias la
-
 alias la="ls -la"
 
-export EDITOR="/opt/nvim/nvim"
+# set nvim as bash editor
+export EDITOR="/opt`/nvim/nvim"
 
+# add ~/.local/bin to PATH
+export PATH="$PATH:/home/lkmliz/.local/bin"
