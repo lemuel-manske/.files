@@ -1,0 +1,116 @@
+let mapleader=" "
+
+set visualbell
+set noerrorbells
+
+set notimeout
+
+set scrolloff=10    " scroll when reaching 10 lines from edge
+
+set nowrap          " disable line wrapping
+
+" line numbers
+set number          " show line numbers
+set relativenumber  " show line numbers relative to cursor
+
+" use system clipboard
+set clipboard^=unnamed,unnamedplus
+
+" searching
+set ignorecase      " ignore case when searching
+set smartcase       " case-sensitive if uppercase letters are used
+set hlsearch        " highlight search
+set incsearch       " highlight when typing
+
+" use idea smart join - S-j
+set ideajoin
+
+" =-=-=- keymappings -=-=-=
+
+inoremap <C-y> <Action>(EditorChooseLookupItem)
+
+noremap x "_x
+noremap X "_d
+noremap \ "_
+noremap U <C-r>
+
+" move focus to left window
+noremap <A-h> <C-w><C-h>
+
+" move focus to right window
+noremap <A-l> <C-w><C-l>
+
+" move focus to below window
+noremap <A-j> <C-w><C-j>
+
+" move focus to upper window
+noremap <A-k> <C-w><C-k>
+
+" split window vertically
+noremap <A-s>v <C-w>s
+
+" split window horizontally
+noremap <A-s>h <C-w>v
+
+" close "buffer"
+noremap <A-x> :close<CR>
+" clear highlights
+noremap <Esc> :nohlsearch<CR>
+
+
+" consider CamelCase and snake_case
+
+" move to start of next word
+map w [w
+
+" move to end of next word
+map e ]w
+
+" move to start of previous word
+map b [b
+
+" move to end of previous word
+map ge ]b
+
+" open window contexts
+map <leader>c <Action>(Macro.Commit)
+map <leader>g <Action>(Macro.Gradle)
+map <leader>b <Action>(Macro.Build)
+
+" searching
+map <leader>sc <Action>(GotoClass)
+map <leader>sf <Action>(GotoFile)
+map <leader>ss <Action>(GotoSymbol)
+map <leader>sa <Action>(GotoAction)
+map <leader>fs <Action>(FindInPath)
+map <leader>fr <Action>(ReplaceInPath)
+map <leader><leader> <Action>(RecentFiles)
+
+" goto within class
+map <leader-g>d <Action>(GotoDeclaration)
+map <leader-g>y <Action>(GotoTypeDeclaration)
+map <leader-g>i <Action>(GotoImplementation)
+map <leader-g>t <Action>(GotoTest)
+map <leader-g>u <Action>(ShowUsages)
+map <leader>t <Action>(QuickTypeDefinition)
+
+" code refactoring & actions
+map <leader>rn <Action>(RenameElement)
+map <leader>rm <Action>(ExtractMethod)
+map <leader>rv <Action>(IntroduceVariable)
+map <leader>rf <Action>(IntroduceField)
+map <leader>ri <Action>(Inline)
+map <leader>rs <Action>(ChangeSignature)
+map <leader>rw <Action>(SurroundWith)
+map <leader>rg <Action>(Generate)
+map <leader>rc <Action>(EditorCompleteStatement)
+
+" files
+map <leader>qq <Action>(CloseContent)
+map <leader>nf <Action>(NewFile)
+map <leader>nd <Action>(NewDir)
+map <leader>se <Action>(Macro.SelectInProject)
+
+
+
+Plug 'machakann/vim-highlightedyank' " highlight on yank
