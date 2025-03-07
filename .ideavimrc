@@ -27,7 +27,7 @@ set ideajoin
 
 " =-=-=- keymappings -=-=-=
 
-inoremap <C-y> <Action>(EditorChooseLookupItem)
+imap <C-y> <Action>(EditorChooseLookupItemCompleteStatement)
 
 noremap x "_x
 noremap X "_d
@@ -72,11 +72,6 @@ map b [b
 " move to end of previous word
 map ge ]b
 
-" open window contexts
-map <leader>c <Action>(Macro.Commit)
-map <leader>g <Action>(Macro.Gradle)
-map <leader>b <Action>(Macro.Build)
-
 " searching
 map <leader>sc <Action>(GotoClass)
 map <leader>sf <Action>(GotoFile)
@@ -87,11 +82,12 @@ map <leader>fr <Action>(ReplaceInPath)
 map <leader><leader> <Action>(RecentFiles)
 
 " goto within class
-map <leader-g>d <Action>(GotoDeclaration)
-map <leader-g>y <Action>(GotoTypeDeclaration)
-map <leader-g>i <Action>(GotoImplementation)
-map <leader-g>t <Action>(GotoTest)
-map <leader-g>u <Action>(ShowUsages)
+map <leader>gd <Action>(GotoDeclaration)
+map <leader>gy <Action>(GotoTypeDeclaration)
+map <leader>gi <Action>(GotoImplementation)
+map <leader>gs <Action>(GotoSuperMethod)
+map <leader>gt <Action>(GotoTest)
+map <leader>gu <Action>(ShowUsages)
 map <leader>t <Action>(QuickTypeDefinition)
 
 " code refactoring & actions
@@ -104,7 +100,7 @@ map <leader>rs <Action>(ChangeSignature)
 map <leader>rw <Action>(SurroundWith)
 map <leader>rg <Action>(Generate)
 map <leader>rc <Action>(EditorCompleteStatement)
-
+map <leader>ff <Action>(ReformatCode)
 " files
 map <leader>qq <Action>(CloseContent)
 map <leader>nf <Action>(NewFile)
