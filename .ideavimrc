@@ -58,20 +58,6 @@ noremap <A-x> :close<CR>
 noremap <Esc> :nohlsearch<CR>
 
 
-" consider CamelCase and snake_case
-
-" move to start of next word
-map w [w
-
-" move to end of next word
-map e ]w
-
-" move to start of previous word
-map b [b
-
-" move to end of previous word
-map ge ]b
-
 " searching
 map <leader>sc <Action>(GotoClass)
 map <leader>sf <Action>(GotoFile)
@@ -104,9 +90,9 @@ map <leader>ff <Action>(ReformatCode)
 " files
 map <leader>qq <Action>(CloseContent)
 map <leader>nf <Action>(NewFile)
+map <leader>nc <Action>(NewClass)
 map <leader>nd <Action>(NewDir)
 map <leader>se <Action>(Macro.SelectInProject)
-
 
 
 Plug 'machakann/vim-highlightedyank' " highlight on yank
