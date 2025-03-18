@@ -2,38 +2,26 @@ local servers = {
 	"lua_ls",
 	"stylua",
 	"sqlfmt",
-	"jdtls",
-	"typescript-language-server",
+	"ts_ls",
+	"eslint_d",
 }
 
 return {
 	{
 		"williamboman/mason.nvim",
+		dependencies = {
+			"williamboman/mason-lspconfig.nvim",
+		},
 		config = function()
-			require("mason").setup({})
-		end,
-	},
+			local mason = require("mason")
+			local mason_lspconfig = require("mason-lspconfig")
 
-	{
-		"williamboman/mason-lspconfig.nvim",
-		config = function()
-			require("mason-lspconfig").setup({
-				automatic_installation = false,
-				handlers = {
-					function(server_name)
-						local server = servers[server_name] or {}
+			mason.setup({})
 
-						require("lspconfig")[server_name].setup(server)
-					end,
-				},
+			mason_lspconfig.setup({
+				ensure_installed = servers,
+				automatic_installation = true,
 			})
-		end,
-	},
-
-	{
-		"WhoIsSethDaniel/mason-tool-installer.nvim",
-		config = function()
-			require("mason-tool-installer").setup({ ensure_installed = servers })
 		end,
 	},
 
