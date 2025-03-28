@@ -14,3 +14,6 @@ vim.keymap.set("n", "<A-s>h", "<C-w>s", { desc = "[S]plit window [h]orizontally"
 vim.keymap.set("n", "<A-x>", "<cmd>close<CR>", { desc = "[S]plit e[x]clude", remap = false })
 
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
+
+
+vim.keymap.set("n", "<leader>e", ":lua vim.diagnostic.open_float(0, { scope = \"line\" })<CR>", { desc = "Show [e]rror line diagnotic" })

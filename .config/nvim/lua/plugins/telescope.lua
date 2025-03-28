@@ -6,6 +6,7 @@ return {
 		"nvim-lua/plenary.nvim",
 		{
 			"nvim-telescope/telescope-fzf-native.nvim",
+			"nvim-telescope/telescope-live-grep-args.nvim",
 
 			build = "make",
 
@@ -18,6 +19,7 @@ return {
 	},
 	config = function()
 		local actions = require("telescope.actions")
+
 		require("telescope").setup({
 			extensions = {
 				["ui-select"] = {
@@ -28,17 +30,24 @@ return {
 				i = {
 					["<C-j>"] = actions.move_selection_next,
 					["<C-k>"] = actions.move_selection_previous,
+					["<C-f>"] = actions.to_fuzzy_refine,
 				},
 			},
 		})
 
 		pcall(require("telescope").load_extension, "fzf")
 		pcall(require("telescope").load_extension, "ui-select")
+		pcall(require("telescope").load_extension, "live_grep_args")
 
 		local builtin = require("telescope.builtin")
 
 		vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "[S]earch [K]eymaps" })
 		vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "[S]earch [F]iles" })
 		vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "[ ] Find existing buffers" })
+		vim.keymap.set("n", "<leader>sg", ":Telescope live_grep search_dirs=.<CR>", { desc = "[G]rep" })
+
+		local ext = require("telescope").extensions
+
+		vim.keymap.set("n", "<leader>sa", ext.live_grep_args.live_grep_args, { desc = "Grep with [a]rgs" })
 	end,
 }

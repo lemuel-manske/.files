@@ -34,10 +34,10 @@ return {
 		config = function()
 			local telescope = require("telescope.builtin")
 
-			vim.keymap.set("n", "gd", telescope.lsp_definitions, { desc = "[G]oto [D]efinition" })
-			vim.keymap.set("n", "gr", telescope.lsp_references, { desc = "[G]oto [R]eferences" })
-			vim.keymap.set("n", "gI", telescope.lsp_implementations, { desc = "[G]oto [I]mplementation" })
-			vim.keymap.set("n", "<leader>D", telescope.lsp_type_definitions, { desc = "Type [D]efinition" })
+			vim.keymap.set("n", "<leader>gd", telescope.lsp_definitions, { desc = "[G]oto [D]efinition" })
+			vim.keymap.set("n", "<leader>gr", telescope.lsp_references, { desc = "[G]oto [R]eferences" })
+			vim.keymap.set("n", "<leader>gi", telescope.lsp_implementations, { desc = "[G]oto [I]mplementation" })
+			vim.keymap.set("n", "<leader>gt", telescope.lsp_type_definitions, { desc = "Type [D]efinition" })
 			vim.keymap.set("n", "<leader>ds", telescope.lsp_document_symbols, { desc = "[D]ocument [S]ymbols" })
 			vim.keymap.set(
 				"n",
