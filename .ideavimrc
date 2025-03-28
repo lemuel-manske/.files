@@ -27,7 +27,7 @@ set ideajoin
 
 " =-=-=- keymappings -=-=-=
 
-imap <C-y> <Action>(EditorChooseLookupItemCompleteStatement)
+imap <C-y> <Action>(EditorChooseLookupItem)<Action>(InsertInlineCompletionAction)
 
 noremap x "_x
 noremap X "_d
@@ -54,9 +54,26 @@ noremap <A-s>h <C-w>v
 
 " close "buffer"
 noremap <A-x> :close<CR>
+
 " clear highlights
 noremap <Esc> :nohlsearch<CR>
 
+" running tests
+map <leader>tr <Action>(Run)
+map <leader>td <Action>(Debug)
+map <leader>ts <Action>(Stop)
+
+" hide windows
+map <leader>h <Action>(HideAllWindows)
+
+" move tabs
+map <leader>ml <Action>(MoveTabRight)
+map <leader>md <Action>(MoveTabDown)
+map <leader>mm <Action>(UnsplitAll)
+
+" jump through methods
+map m <Action>(MethodUp)
+map n <Action>(MethodDown)
 
 " searching
 map <leader>sc <Action>(GotoClass)
@@ -78,21 +95,27 @@ map <leader>t <Action>(QuickTypeDefinition)
 
 " code refactoring & actions
 map <leader>rn <Action>(RenameElement)
+map <leader>rs <Action>(ChangeSignature)
 map <leader>rm <Action>(ExtractMethod)
+map <leader>rp <Action>(IntroduceParameter)
+map <leader>rc <Action>(IntroduceConstant)
 map <leader>rv <Action>(IntroduceVariable)
 map <leader>rf <Action>(IntroduceField)
 map <leader>ri <Action>(Inline)
-map <leader>rs <Action>(ChangeSignature)
 map <leader>rw <Action>(SurroundWith)
 map <leader>rg <Action>(Generate)
-map <leader>rc <Action>(EditorCompleteStatement)
-map <leader>ff <Action>(ReformatCode)
+map <leader>ro <Action>(OptimizeImports)
+
+map Q <Action>(ReformatCode)
+
 " files
 map <leader>qq <Action>(CloseContent)
 map <leader>nf <Action>(NewFile)
 map <leader>nc <Action>(NewClass)
 map <leader>nd <Action>(NewDir)
-map <leader>se <Action>(Macro.SelectInProject)
 
+" macros
+
+map <leader>se <Action>(Macro.SelectInProject)
 
 Plug 'machakann/vim-highlightedyank' " highlight on yank
