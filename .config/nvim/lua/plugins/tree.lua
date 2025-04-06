@@ -17,6 +17,13 @@ return {
 
 				vim.keymap.set(
 					"n",
+					"x",
+					api.fs.remove,
+					{ desc = "E[x]clude file", buffer = bufnr, noremap = true, silent = true, nowait = true }
+				)
+
+				vim.keymap.set(
+					"n",
 					"r",
 					api.fs.rename_full,
 					{ desc = "[R]ename file", buffer = bufnr, noremap = true, silent = true, nowait = true }
