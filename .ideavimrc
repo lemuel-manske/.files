@@ -114,6 +114,10 @@ map <leader>nf <Action>(NewFile)
 map <leader>nc <Action>(NewClass)
 map <leader>nd <Action>(NewDir)
 
+" vcs
+
+map <leader>v <Action>(Vcs.RollbackChangedLines)
+
 " macros
 
 map <leader>se <Action>(Macro.SelectInProject)
