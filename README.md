@@ -1,2 +1,8 @@
 # .files
-My dev env config
+
+my dev env configuration.
+
+```bash
+stow .
+```
+
