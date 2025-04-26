@@ -4,3 +4,5 @@ lsp.lua_ls.setup({})
 
 lsp.ts_ls.setup({})
 
+lsp.gopls.setup({})
+
