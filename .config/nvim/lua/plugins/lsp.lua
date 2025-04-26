@@ -1,9 +1,6 @@
 local servers = {
 	"lua_ls",
-	"stylua",
-	"sqlfmt",
 	"ts_ls",
-	"eslint_d",
 }
 
 return {
