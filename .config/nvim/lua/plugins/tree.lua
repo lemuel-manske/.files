@@ -22,6 +22,13 @@ return {
 					{ desc = "E[x]clude file", buffer = bufnr, noremap = true, silent = true, nowait = true }
 				)
 
+			  vim.keymap.set(
+					"n",
+					"cf",
+					api.fs.copy.filename,
+					{ desc = "[C]opy [f]ilename", buffer = bufnr, noremap = true, silent = true, nowait = true }
+				)
+
 				vim.keymap.set(
 					"n",
 					"r",
@@ -55,6 +62,13 @@ return {
 					"h",
 					api.node.navigate.parent_close,
 					{ desc = "Close parent", buffer = bufnr, noremap = true, silent = true, nowait = true }
+				)
+
+				vim.keymap.set(
+					"n",
+					"t",
+					api.node.open.tab,
+					{ desc = "Open in new [T]ab", buffer = bufnr, noremap = true, silent = true, nowait = true }
 				)
 			end,
 		})
