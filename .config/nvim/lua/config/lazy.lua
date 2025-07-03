@@ -3,7 +3,7 @@ local lazy = {}
 function lazy.install(path)
 	print("Installing lazy.nvim...")
 
-	vim.fin.system({
+	vim.fn.system({
 		"git",
 		"clone",
 		"--filter=blob:none",
