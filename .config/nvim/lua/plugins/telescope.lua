@@ -20,7 +20,13 @@ return {
 	config = function()
 		local actions = require("telescope.actions")
 
-		require("telescope").setup({
+		local open_after_tree = function(prompt_buffer)
+			vim.defer_fn(function ()
+				actions.select_default(prompt_buffer)
+			end, 100)
+		end
+
+    require("telescope").setup({
 			extensions = {
 				["ui-select"] = {
 					require("telescope.themes").get_dropdown(),
@@ -31,6 +37,10 @@ return {
 					["<C-j>"] = actions.move_selection_next,
 					["<C-k>"] = actions.move_selection_previous,
 					["<C-f>"] = actions.to_fuzzy_refine,
+          ["<CR>"] = open_after_tree,
+				},
+        n = {
+					["<CR>"] = open_after_tree
 				},
 			},
 		})
