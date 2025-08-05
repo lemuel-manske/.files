@@ -53,7 +53,7 @@ return {
 
     vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "[S]earch [K]eymaps" })
     vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "[S]earch [F]iles" })
-    vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "[ ] Find existing buffers" })
+    vim.keymap.set("n", "<leader>ss", builtin.buffers, { desc = "[ ] Find existing buffers" })
     vim.keymap.set("n", "<leader>sg", ":Telescope live_grep search_dirs=.<CR>", { desc = "[G]rep" })
 
     local ext = require("telescope").extensions
