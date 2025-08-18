@@ -1,2 +1,5 @@
 export EDITOR='nvim'
-export GRADLE_OPTS='-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5010'
+
+export HTTP_PROXY='http://proxy.whebdc.com.br:3128'
+export HTTPS_PROXY='http://proxy.whebdc.com.br:3128'
+export NO_PROXY='localhost,127.0.0.0/8,::1,nexus-emr.philips.com'

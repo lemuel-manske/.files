@@ -1,0 +1,44 @@
+local opt = vim.opt
+local g = vim.g
+
+-- =-=-=- configs -=-=-=
+
+g.mapleader = " "
+g.maplocalleader = " "
+
+-- formatting
+opt.tabstop = 2 -- 2 spcs for tabs
+opt.shiftwidth = 2 -- 2 spcs for indent width
+opt.expandtab = true -- expand tab to spcs
+opt.autoindent = true -- copy indent from curr line when starting new one
+
+opt.scrolloff = 10 -- scroll when reach 10
+
+opt.clipboard = "unnamedplus" -- use system clipboard
+opt.wrap = false
+
+-- searching
+opt.ignorecase = true -- ignore case when searching
+opt.smartcase = true -- if mixed case then case-sensitive
+
+opt.signcolumn = "yes" -- sigh column on left so that text doesn't shift
+
+opt.splitright = true -- vsplit right
+opt.splitbelow = true -- split below
+
+-- =-=-=- vscode -=-=-=
+
+local vscode = require('vscode')
+
+-- add selection to next find match
+vim.keymap.set({ "n", "x", "i" }, "<C-d>", function()
+  vscode.with_insert(function()
+    vscode.action("editor.action.addSelectionToNextFindMatch")
+  end)
+end)
+
+-- reveal file in explorer view
+vim.keymap.set({ "n" }, "<leader>se", function()
+  vscode.action("workbench.files.action.showActiveFileInExplorer")
+end)
+
