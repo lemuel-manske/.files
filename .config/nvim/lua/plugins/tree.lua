@@ -3,6 +3,16 @@ return {
 	lazy = false,
 	config = function()
 		require("nvim-tree").setup({
+      renderer = {
+        icons = {
+          show = {
+            file = false,
+            folder = false,
+            folder_arrow = false,
+            git = false,
+          },
+        },
+      },
 			hijack_netrw = true,
 			auto_reload_on_write = true,
 			on_attach = function(bufnr)

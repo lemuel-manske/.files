@@ -7,7 +7,7 @@ g.mapleader = " "
 g.maplocalleader = " "
 
 -- used at plugins
-g.have_nerd_font = true
+g.have_nerd_font = false 
 
 opt.timeoutlen = 250 -- usefull for plugins
 
