@@ -1,6 +1,6 @@
 # .files
 
-_Nor about being stylish, but simply what makes me a better dev_
+_Not about being stylish, but simply what makes me a better dev_
 
 My developnment environment configuration.
 
