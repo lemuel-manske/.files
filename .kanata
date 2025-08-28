@@ -1,6 +1,0 @@
-(defsrc f i j k l s lalt d spc a b q)
-
-(defalias f (tap-hold 100 200 f
-(layer-while-held nav)))
-(deflayer base   @f   i    j    k    l     s    lalt d    spc   a    b   q)
-(deflayer nav    _    up   left down right lsft home lctl end   lalt del z)

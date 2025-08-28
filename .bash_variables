@@ -1,5 +1,2 @@
 export EDITOR='nvim'
 
-export HTTP_PROXY='http://proxy.whebdc.com.br:3128'
-export HTTPS_PROXY='http://proxy.whebdc.com.br:3128'
-export NO_PROXY='localhost,127.0.0.0/8,::1,nexus-emr.philips.com'
