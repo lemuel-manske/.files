@@ -27,7 +27,7 @@ set ideajoin
 
 " =-=-=- keymappings -=-=-=
 
-imap <C-y> <Action>(EditorChooseLookupItem)<Action>(InsertInlineCompletionAction)
+imap tab <Action>(EditorChooseLookupItem)<Action>(InsertInlineCompletionAction)
 
 noremap x "_x
 noremap X "_d
