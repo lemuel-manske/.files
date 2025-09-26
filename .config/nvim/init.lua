@@ -1,3 +1,9 @@
 require("lkmliz/core")
-require("config.lazy")
-require("config.lspconfig")
+
+if vim.g.vscode then
+  require("config.vscode")
+else
+  require("config.lazy")
+  require("config.lspconfig")
+end
+
