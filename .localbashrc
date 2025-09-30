@@ -1,7 +1,6 @@
-load ~/.bash_aliases
-load ~/.bash_wsl
-load ~/.bash_variables
-load ~/.hidden_bash_variables
+. ~/.bash_aliases
+. ~/.bash_variables
+. ~/.hidden_bash_variables
 
 SSH_ENV="$HOME/.ssh/agent-environment"
 
