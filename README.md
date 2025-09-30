@@ -14,13 +14,7 @@ sudo apt-get install curl fuse zip unzip wget stow
 
 ```bash
 # ~/.bashrc
-function load() {
-  if [ -f $1 ]; then
-      . $1
-  fi
-}
-
-load ~/.localbashrc
+. ~/.localbashrc
 ```
 
 ```bash
