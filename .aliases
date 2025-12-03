@@ -1,0 +1,19 @@
+alias ls='ls --color=auto'
+alias ll='ls -lh'
+alias la='ls -lha'
+
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
+alias gs='git status'
+alias ga='git add .'
+alias gc='git commit'
+alias gp='git push'
+
+alias cls='clear'
+
+alias k='kubectl'
+
+alias n='nvim'
+

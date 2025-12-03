@@ -1,0 +1,7 @@
+.hidden_*
+
+.config/Electron
+
+.emacs.d
+!.emacs.d/init.el
+
