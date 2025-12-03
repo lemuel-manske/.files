@@ -7,8 +7,22 @@ vim.keymap.set({ "n", "x", "i" }, "<C-d>", function()
   end)
 end)
 
--- reveal file in explorer view
+-- C-S-e 
 vim.keymap.set({ "n" }, "<leader>se", function()
   vscode.action("workbench.files.action.showActiveFileInExplorer")
 end)
 
+-- C-p
+vim.keymap.set({ "n" }, "<leader>sf", function()
+  vscode.action("workbench.action.quickOpen")
+end)
+
+-- C-S-p
+vim.keymap.set({ "n" }, "<leader>sc", function()
+  vscode.action("workbench.action.showCommands")
+end)
+
+-- C-S-f
+vim.keymap.set({ "n" }, "<leader>ss", function()
+  vscode.action("workbench.action.findInFiles")
+end)
