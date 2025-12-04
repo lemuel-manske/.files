@@ -44,6 +44,14 @@ opt.splitright = true -- vsplit right
 opt.splitbelow = true -- split below
 
 -- lists
-opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
+opt.list = true
+opt.listchars = {
+  space = "·",
+  tab = "→ ",
+  trail = "•",
+  extends = "⟩",
+  precedes = "⟨",
+  nbsp = "␣",
+}
 
 opt.inccommand = "split"

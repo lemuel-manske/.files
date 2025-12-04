@@ -26,3 +26,4 @@ end)
 vim.keymap.set({ "n" }, "<leader>ss", function()
   vscode.action("workbench.action.findInFiles")
 end)
+

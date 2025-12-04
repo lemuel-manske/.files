@@ -28,7 +28,7 @@ return {
         glyphs = {
           git = {
             unstaged  = "~",   -- modified but not staged
-            staged    = "+",   -- added or modified and staged
+            staged    = "+",   -- added/modified and staged
             unmerged  = "!",   -- merge conflict
             renamed   = ">",   -- renamed
             untracked = "?",   -- new file
@@ -40,7 +40,6 @@ return {
     },
     filters = {
       dotfiles = false,
-      custom = { "^.git$" },
     },
     update_focused_file = {
       enable = true,
