@@ -1,3 +1,5 @@
+local keymappings = require("lkmliz/adapter/lazy/lsp/keymappings")
+
 local M = {}
 
 function M:setup()
@@ -42,6 +44,9 @@ function M:setup()
     root_dir = root_dir,
     settings = { java = {} },
     init_options = { bundles = {} },
+    on_attach = function(client, bufnr) 
+      keymappings.on_attach(client, bufnr)
+    end
   }
 
   jdtls.start_or_attach(config)

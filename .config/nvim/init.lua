@@ -1,10 +1,8 @@
 require("lkmliz/core")
 
 if vim.g.vscode then
-  require("config.vscode")
+  require("lkmliz/adapter/vscode")
 else
-  require("config.lazy")
-  require("config.init")
+  require("lkmliz/adapter/lazy")
 end
-
 
