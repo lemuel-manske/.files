@@ -5,12 +5,38 @@ function M.on_attach(client, bufnr)
     vim.keymap.set(mode, lhs, rhs, { buffer = bufnr })
   end
 
-  -- LSP Navigation
+  local telescope = require("telescope.builtin")
+
+  -- LSP Navigation via Telescope (short paths, no preview)
+  local opts = {
+    path_display = { "smart" },
+    fname_width = 60,
+    trim_text = true,
+    previewer = true,
+  }
+
+  -- Go to Declaration (Telescope doesn't have this one)
   map("n", "<leader>gD", vim.lsp.buf.declaration)
-  map("n", "<leader>gd", vim.lsp.buf.definition)
-  map("n", "<leader>gi", vim.lsp.buf.implementation)
-  map("n", "<leader>gr", vim.lsp.buf.references)
-  map("n", "<leader>gt", vim.lsp.buf.type_definition)
+
+  -- Go to Definition
+  map("n", "<leader>gd", function()
+    telescope.lsp_definitions(opts)
+  end)
+
+  -- Go to Implementation
+  map("n", "<leader>gi", function()
+    telescope.lsp_implementations(opts)
+  end)
+
+  -- References
+  map("n", "<leader>gr", function()
+    telescope.lsp_references(opts)
+  end)
+
+  -- Type Definition
+  map("n", "<leader>gt", function()
+    telescope.lsp_type_definitions(opts)
+  end)
 
   -- Hover + actions
   map("n", "K", vim.lsp.buf.hover)
@@ -26,3 +52,4 @@ function M.on_attach(client, bufnr)
 end
 
 return M
+

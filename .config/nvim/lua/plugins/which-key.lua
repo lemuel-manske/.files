@@ -13,10 +13,11 @@ return {
       },
     },
 
-    window = {
+    win = {
       border = "rounded",
-      margin = { 1, 1, 1, 1 },
-      padding = { 2, 2, 2, 2 },
+      padding = { 1, 2 },
+      title = true,
+      title_pos = "center",
     },
 
     layout = {
