@@ -1,11 +1,11 @@
 local opt = vim.opt
 local g = vim.g
-
 g.mapleader = " "
 g.maplocalleader = " "
 
 -- used at plugins
 g.have_nerd_font = false
+g.editorconfig = true
 
 opt.timeoutlen = 250 -- usefull for plugins
 
