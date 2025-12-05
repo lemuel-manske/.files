@@ -1,12 +1,13 @@
-# my neovim configuration
+# Neovim
 
-I'm noob to vi, vim or neovim (the one true vim).
+_A little bit of masochism goes a long way_
 
-## VSCode
+## For VSCode
 
-This configuration handles both neovim and it's vscode extension. On VSCode remember to set:
+This configuration handles both Neovim usage via terminal and by it's vscode extension. On VSCode remember to set:
 
 ```json
 "vscode-neovim.useWSL": true,
 "vscode-neovim.neovimInitVimPaths.linux": "~/.config/nvim/init.lua"
 ```
+
