@@ -26,6 +26,42 @@ function M:setup()
   })[vim.loop.os_uname().sysname]
 
   local config = {
+    settings = {
+      java = {
+        -- favor static imports
+        completion = {
+          importOrder = { "*" },
+
+          favoriteStaticMembers = {
+            "org.hamcrest.MatcherAssert.assertThat",
+            "org.hamcrest.Matchers.*",
+            "org.hamcrest.CoreMatchers.*",
+            "org.junit.jupiter.api.Assertions.*",
+            "java.util.Objects.requireNonNull",
+            "java.util.Objects.requireNonNullElse",
+            "org.mockito.Mockito.*"
+          },
+        },
+
+        -- use default formatter
+        format = {
+          enabled = true,
+          settings = {
+            url = home .. ".config/nvim/java/code-style/default-formatter.xml",
+            profile = "Default",
+          },
+        },
+
+        -- no start imports
+        codeGeneration = {
+          organizeImports = {
+            starThreshold = 99,
+            staticStarThreshold = 99,
+          },
+        },
+      },
+    },
+
     cmd = {
       java,
       "-Declipse.application=org.eclipse.jdt.ls.core.id1",
@@ -41,11 +77,18 @@ function M:setup()
       "-configuration", jdtls_path .. "/" .. config_os,
       "-data", workspace_dir,
     },
+
     root_dir = root_dir,
-    settings = { java = {} },
-    init_options = { bundles = {} },
+
     on_attach = function(client, bufnr) 
       keymappings.on_attach(client, bufnr)
+
+      vim.keymap.set("n", "<leader>oi", function()
+        client:exec_cmd({
+          command = "java.edit.organizeImports",
+          arguments = { vim.uri_from_bufnr(bufnr) }
+        })
+      end, { buffer = bufnr, desc = "Organize Imports" })
     end
   }
 

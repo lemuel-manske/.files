@@ -49,6 +49,10 @@ function M.on_attach(client, bufnr)
   map("n", "<leader>e", vim.diagnostic.open_float)
   map("n", "[d", vim.diagnostic.goto_prev)
   map("n", "]d", vim.diagnostic.goto_next)
+
+  vim.keymap.set("n", "Q", function()
+    vim.lsp.buf.format({ async = true })
+  end, { buffer = bufnr, desc = "Format file" })
 end
 
 return M
