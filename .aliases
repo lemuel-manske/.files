@@ -17,3 +17,5 @@ alias k='kubectl'
 
 alias n='nvim'
 
+alias tproject='tmuxinator start project project_name=$(basename $(pwd)) project_path=$(pwd)'
+

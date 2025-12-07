@@ -10,12 +10,12 @@ function M:setup()
 
   if not root_dir then return end
 
+  local home = vim.uv.os_homedir()
+
   local project_name = vim.fn.fnamemodify(root_dir, ":p:h:t")
   local workspace_dir = vim.fn.stdpath("data") .. "/jdtls-workspace/" .. project_name
 
-  local java_version = "21.0.7-tem"
-  local home = vim.uv.os_homedir()
-  local java = home .. "/.sdkman/candidates/java/" .. java_version .. "/bin/java"
+  local java = home .. "/.sdkman/candidates/java/current/bin/java"
 
   local jdtls_path = vim.fn.stdpath("data") .. "/mason/packages/jdtls"
   local launcher = vim.fn.glob(jdtls_path .. "/plugins/org.eclipse.equinox.launcher_*.jar")

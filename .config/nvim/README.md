@@ -11,3 +11,7 @@ This configuration handles both Neovim usage via terminal and by it's vscode ext
 "vscode-neovim.neovimInitVimPaths.linux": "~/.config/nvim/init.lua"
 ```
 
+## Java
+
+Install [specified JDKs](./lua/adapter/lazy/lsp/java.lua).
+
