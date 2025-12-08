@@ -28,3 +28,11 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+-- create JUnit test with "test<"
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "java",
+  callback = function()
+
+  end,
+})
+

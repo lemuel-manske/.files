@@ -39,7 +39,15 @@ return {
     }
   },
 
+  {
+    "mfussenegger/nvim-dap"
+  },
+
   { 
-    "mfussenegger/nvim-jdtls"
+    "mfussenegger/nvim-jdtls",
+
+    dependencies = {
+      "mfussenegger/nvim-dap"
+    }
   }
 }

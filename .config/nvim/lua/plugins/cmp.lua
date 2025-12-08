@@ -26,6 +26,19 @@ return {
           ["<CR>"] = cmp.mapping.confirm({ select = true }),
         }),
       })
+
+      local junit = require("plugins/ext/cmp/junit").new()
+
+      cmp.register_source("junit", junit)
+
+      cmp.setup.filetype("java", {
+        sources = cmp.config.sources({
+          { name = "junit" },
+          { name = "nvim_lsp" },
+          { name = "buffer" },
+          { name = "path" },
+        }),
+      })
     end
   },
 

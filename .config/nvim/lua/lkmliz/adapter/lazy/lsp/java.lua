@@ -1,5 +1,17 @@
 local keymappings = require("lkmliz/adapter/lazy/lsp/keymappings")
 
+local bundles = {}
+
+vim.list_extend(bundles, vim.split(
+  vim.fn.glob("~/.local/share/nvim/mason/packages/java-test/extension/server/*.jar"),
+  "\n"
+))
+
+vim.list_extend(bundles, vim.split(
+  vim.fn.glob("~/.local/share/nvim/mason/packages/java-debug-adapter/extension/server/*.jar"),
+  "\n"
+))
+
 local M = {}
 
 function M:setup()
@@ -45,10 +57,9 @@ function M:setup()
 
         -- use default formatter
         format = {
-          enabled = true,
           settings = {
-            url = home .. ".config/nvim/java/code-style/default-formatter.xml",
-            profile = "Default",
+            url = home .. "/.config/nvim/java/code-style/default-formatter.xml",
+            profile = "default",
           },
         },
 
@@ -78,10 +89,20 @@ function M:setup()
       "-data", workspace_dir,
     },
 
+    init_options = { bundles = bundles },
+
     root_dir = root_dir,
 
     on_attach = function(client, bufnr) 
       keymappings.on_attach(client, bufnr)
+
+      vim.keymap.set("n", "<leader>tc", function()
+        jdtls.test_class()
+      end, { buffer = bufnr, desc = "Run Java test class" })
+
+      vim.keymap.set("n", "<leader>tm", function()
+        jdtls.test_nearest_method()
+      end, { buffer = bufnr, desc = "Run nearest Java test" })
 
       vim.keymap.set("n", "<leader>oi", function()
         client:exec_cmd({

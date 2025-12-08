@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <profiles version="21">
-	<profile kind="CodeFormatterProfile" name="CCI Platform" version="21">
+	<profile kind="CodeFormatterProfile" name="default" version="21">
 		<setting id="org.eclipse.jdt.core.formatter.tabulation.char" value="space"/>
 		<setting id="org.eclipse.jdt.core.formatter.use_tabs_only_for_leading_indentations" value="false"/>
 		<setting id="org.eclipse.jdt.core.formatter.indentation.size" value="4"/>
@@ -236,8 +236,8 @@
 		<setting id="org.eclipse.jdt.core.formatter.insert_space_before_question_in_wildcard" value="do not insert"/>
 		<setting id="org.eclipse.jdt.core.formatter.insert_space_after_question_in_wildcard" value="do not insert"/>
 		<setting id="org.eclipse.jdt.core.formatter.number_of_empty_lines_to_preserve" value="2"/>
-		<setting id="org.eclipse.jdt.core.formatter.blank_lines_before_package" value="1"/>
-		<setting id="org.eclipse.jdt.core.formatter.blank_lines_after_package" value="1"/>
+		<setting id="org.eclipse.jdt.core.formatter.blank_lines_before_package" value="0"/>
+		<setting id="org.eclipse.jdt.core.formatter.blank_lines_after_package" value="0"/>
 		<setting id="org.eclipse.jdt.core.formatter.blank_lines_before_imports" value="1"/>
 		<setting id="org.eclipse.jdt.core.formatter.blank_lines_after_imports" value="1"/>
 		<setting id="org.eclipse.jdt.core.formatter.blank_lines_between_type_declarations" value="1"/>
