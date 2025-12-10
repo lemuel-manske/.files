@@ -15,8 +15,6 @@ vim.keymap.set("n", "<A-x>", "<cmd>close<CR>", { desc = "[S]plit e[x]clude", rem
 
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
-vim.keymap.set("n", "<leader>sv", "<cmd>Vexpl<CR>")
-
 vim.keymap.set("n", "<leader><leader>", ":lua vim.diagnostic.open_float(0, { scope = \"line\" })<CR>", { desc = "Show line diagnostic" })
 
 vim.keymap.set("n", "<leader>rm", function()
