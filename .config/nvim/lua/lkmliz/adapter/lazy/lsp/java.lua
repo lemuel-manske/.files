@@ -1,4 +1,4 @@
-local keymappings = require("lkmliz/adapter/lazy/lsp/keymappings")
+local attach = require("lkmliz/adapter/lazy/lsp/attach")
 
 local bundles = {}
 
@@ -94,7 +94,7 @@ function M:setup()
     root_dir = root_dir,
 
     on_attach = function(client, bufnr) 
-      keymappings.on_attach(client, bufnr)
+      attach.on_attach(client, bufnr)
 
       vim.keymap.set("n", "<leader>tc", function()
         jdtls.test_class()
