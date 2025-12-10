@@ -9,19 +9,13 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	end,
 })
 
--- renames NvimTree status line
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "NvimTree",
+-- create directories when writing files
+vim.api.nvim_create_autocmd("BufWritePre", {
   callback = function()
-    vim.opt_local.statusline = "File Explorer"
-  end,
-})
-
--- create JUnit test with "test<"
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "java",
-  callback = function()
-
+    local dir = vim.fn.expand('<afile>:p:h')
+    if vim.fn.isdirectory(dir) == 0 then
+      vim.fn.mkdir(dir, 'p')
+    end
   end,
 })
 
