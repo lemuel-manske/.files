@@ -26,6 +26,16 @@ vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move selection down",
 
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
+vim.keymap.set("n", "<leader>se", ":Explore<CR>", { desc = "Open file explorer" })
+
+vim.keymap.set('n', '<leader>nf', function()
+  local dir = vim.fn.expand("%:h")
+  local name = vim.fn.input("New file (with extension): ")
+
+  if name == "" then return end
+  vim.cmd("edit " .. dir .. "/" .. name)
+end)
+
 vim.keymap.set("n", "<leader><leader>", function()
   vim.diagnostic.open_float({ scope = "line" })
 end, { desc = "Show line diagnostic" })
