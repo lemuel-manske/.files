@@ -24,13 +24,12 @@ vim.keymap.set("n", "<C-p>", ":bprevious<CR>", { desc = "Return to previous buff
 vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move selection up", remap = false })
 vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move selection down", remap = false })
 
-
-
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
-vim.keymap.set("n", "<leader><leader>", ":lua vim.diagnostic.open_float(0, { scope = \"line\" })<CR>", { desc = "Show line diagnostic" })
+vim.keymap.set("n", "<leader><leader>", function()
+  vim.diagnostic.open_float({ scope = "line" })
+end, { desc = "Show line diagnostic" })
 
 vim.keymap.set("n", "<leader>rm", function()
   vim.cmd([[ %s/\r//g ]])
 end, { desc = "Remove ^M characters" })
-
