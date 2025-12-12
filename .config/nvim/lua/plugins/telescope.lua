@@ -68,17 +68,26 @@ return {
     local keymap = vim.keymap.set
     local builtin = require("telescope.builtin")
 
-    -- Files
-    keymap("n", "<leader>sf", builtin.find_files, { desc = "Find files" })
-    keymap("n", "<leader>sg", builtin.live_grep, { desc = "Live grep" })
+
+    local function find_in_curr_dir()
+      builtin.find_files({ cwd = vim.fn.expand('%:h:p') })
+    end
+
+    local function grep_in_curr_dir()
+      builtin.live_grep({ cwd = vim.fn.expand('%:h:p') })
+    end
+
+    keymap("n", "<leader>sf", find_in_curr_dir, { desc = "Find files in current directory" })
+    keymap("n", "<leader>sG", builtin.find_files, { desc = "Find files" })
+    keymap("n", "<leader>sg", grep_in_curr_dir, { desc = "Live grep in current directory" })
+    keymap("n", "<leader>sG", builtin.live_grep, { desc = "Live grep on project" })
+
     keymap("n", "<leader>sb", builtin.buffers, { desc = "Buffers" })
     keymap("n", "<leader>sh", builtin.help_tags, { desc = "Help" })
 
-    -- Git
     keymap("n", "<leader>gc", builtin.git_commits, { desc = "Git commits" })
     keymap("n", "<leader>gs", builtin.git_status, { desc = "Git status" })
 
-    -- LSP pickers
     keymap("n", "<leader>ld", builtin.lsp_definitions, { desc = "Go to definition" })
     keymap("n", "<leader>lr", builtin.lsp_references, { desc = "References" })
     keymap("n", "<leader>li", builtin.lsp_implementations, { desc = "Implementations" })

@@ -5,4 +5,3 @@ if vim.g.vscode then
 else
   require("lkmliz/adapter/lazy")
 end
-

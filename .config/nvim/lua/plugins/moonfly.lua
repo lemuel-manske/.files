@@ -6,7 +6,7 @@ return {
   lazy = false,
   priority = 1000,
 
-  config = function(_, opts)
+  config = function()
     vim.cmd.colorscheme("moonfly")
   end,
 }

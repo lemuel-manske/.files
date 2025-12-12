@@ -7,7 +7,7 @@ vim.keymap.set({ "n", "x", "i" }, "<C-d>", function()
   end)
 end)
 
--- C-S-e 
+-- C-S-e
 vim.keymap.set({ "n" }, "<leader>se", function()
   vscode.action("workbench.files.action.showActiveFileInExplorer")
 end)
@@ -26,4 +26,3 @@ end)
 vim.keymap.set({ "n" }, "<leader>ss", function()
   vscode.action("workbench.action.findInFiles")
 end)
-

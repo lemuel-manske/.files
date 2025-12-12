@@ -93,7 +93,7 @@ function M:setup()
 
     root_dir = root_dir,
 
-    on_attach = function(client, bufnr) 
+    on_attach = function(client, bufnr)
       attach.on_attach(client, bufnr)
 
       vim.keymap.set("n", "<leader>tc", function()
@@ -117,4 +117,3 @@ function M:setup()
 end
 
 return M
-
