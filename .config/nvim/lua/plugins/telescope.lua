@@ -1,6 +1,8 @@
 return {
   "nvim-telescope/telescope.nvim",
+
   branch = "0.1.x",
+
   dependencies = {
     "nvim-lua/plenary.nvim",
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
@@ -78,7 +80,7 @@ return {
     end
 
     keymap("n", "<leader>sf", find_in_curr_dir, { desc = "Find files in current directory" })
-    keymap("n", "<leader>sG", builtin.find_files, { desc = "Find files" })
+    keymap("n", "<leader>sF", builtin.find_files, { desc = "Find files" })
     keymap("n", "<leader>sg", grep_in_curr_dir, { desc = "Live grep in current directory" })
     keymap("n", "<leader>sG", builtin.live_grep, { desc = "Live grep on project" })
 

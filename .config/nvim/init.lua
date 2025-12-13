@@ -1,7 +1,3 @@
 require("lkmliz/core")
-
-if vim.g.vscode then
-  require("lkmliz/adapter/vscode")
-else
-  require("lkmliz/adapter/lazy")
-end
+require("lkmliz/lazy")
+require("lkmliz/lsp")

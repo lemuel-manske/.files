@@ -29,4 +29,3 @@ return {
     show_keys = true,
   }
 }
-

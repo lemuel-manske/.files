@@ -36,7 +36,7 @@ lazy.opts = {
   },
   change_detection = {
     enabled = false, -- check for config file changes
-    notify = false, -- get a notification when changes are found
+    notify = false,  -- get a notification when changes are found
   },
 }
 

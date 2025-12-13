@@ -4,8 +4,7 @@ return {
     config = function()
       local dap = require("dap")
 
-      -- Java Debug Adapter configuration
-      dap.adapters.java = function(callback, config)
+      dap.adapters.java = function(callback, _)
         callback({
           type = "server",
           host = "127.0.0.1",
@@ -13,7 +12,6 @@ return {
         })
       end
 
-      -- Java Debug Configuration
       dap.configurations.java = {
         {
           name = "Debug (Attach) - Local",
