@@ -1,0 +1,123 @@
+let mapleader=" "
+
+set visualbell
+set noerrorbells
+
+" fixes typing delays with "F" and "T" keys
+nnoremap t <Nop>
+onoremap t <Nop>
+nnoremap f <Nop>
+onoremap f <Nop>
+
+set scrolloff=10    " scroll when reaching 10 lines from edge
+
+set nowrap          " disable line wrapping
+
+" line numbers
+set number          " show line numbers
+set relativenumber  " show line numbers relative to cursor
+
+" use system clipboard
+set clipboard^=unnamed,unnamedplus
+
+" searching
+set ignorecase      " ignore case when searching
+set smartcase       " case-sensitive if uppercase letters are used
+set hlsearch        " highlight search
+set incsearch       " highlight when typing
+
+" use idea smart join - S-j
+set ideajoin
+
+" =-=-=- keymappings -=-=-=
+
+imap tab <Action>(EditorChooseLookupItem)<Action>(InsertInlineCompletionAction)
+
+noremap x "_x
+noremap X "_d
+noremap \ "_
+noremap U <C-r>
+
+" move focus to left window
+noremap <A-h> <C-w><C-h>
+
+" move focus to right window
+noremap <A-l> <C-w><C-l>
+
+" move focus to below window
+noremap <A-j> <C-w><C-j>
+
+" move focus to upper window
+noremap <A-k> <C-w><C-k>
+
+" split window vertically
+noremap <A-s>v <C-w>s
+
+" split window horizontally
+noremap <A-s>h <C-w>v
+
+" close "buffer"
+noremap <A-x> :close<CR>
+
+" clear highlights
+noremap <Esc> :nohlsearch<CR>
+
+" hide windows
+map <leader>h <Action>(HideAllWindows)
+
+" move tabs
+map <leader>ml <Action>(MoveTabRight)
+map <leader>md <Action>(MoveTabDown)
+map <leader>mm <Action>(UnsplitAll)
+
+" jump through methods
+map m <Action>(MethodUp)
+map n <Action>(MethodDown)
+
+" searching
+map <leader>sc <Action>(GotoClass)
+map <leader>sf <Action>(GotoFile)
+map <leader>ss <Action>(GotoSymbol)
+map <leader>sa <Action>(GotoAction)
+map <leader>fs <Action>(FindInPath)
+map <leader>fr <Action>(ReplaceInPath)
+map <leader><leader> <Action>(RecentFiles)
+
+" goto within class
+map <leader>gd <Action>(GotoDeclaration)
+map <leader>gy <Action>(GotoTypeDeclaration)
+map <leader>gi <Action>(GotoImplementation)
+map <leader>gs <Action>(GotoSuperMethod)
+map <leader>gt <Action>(GotoTest)
+map <leader>gu <Action>(ShowUsages)
+
+" code refactoring & actions
+map <leader>rn <Action>(RenameElement)
+map <leader>rs <Action>(ChangeSignature)
+map <leader>rm <Action>(ExtractMethod)
+map <leader>rp <Action>(IntroduceParameter)
+map <leader>rc <Action>(IntroduceConstant)
+map <leader>rv <Action>(IntroduceVariable)
+map <leader>rf <Action>(IntroduceField)
+map <leader>ri <Action>(Inline)
+map <leader>rw <Action>(SurroundWith)
+map <leader>rg <Action>(Generate)
+map <leader>ro <Action>(OptimizeImports)
+
+map Q <Action>(ReformatCode)
+
+" files
+map <leader>qq <Action>(CloseContent)
+map <leader>nf <Action>(NewFile)
+map <leader>nc <Action>(NewClass)
+map <leader>nd <Action>(NewDir)
+
+" vcs
+
+map <leader>v <Action>(Vcs.RollbackChangedLines)
+
+" macros
+
+map <leader>se <Action>(Macro.SelectInProject)
+
+Plug 'machakann/vim-highlightedyank' " highlight on yank
