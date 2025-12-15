@@ -40,8 +40,10 @@ setopt HIST_IGNORE_DUPS
 setopt HIST_APPEND
 
 source ~/.aliases
-source ~/.hidden_variables
 
 export EDITOR="nvim"
+
+export LC_CTYPE=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
 
 export PATH=/home/lkmliz/.opencode/bin:$PATH
