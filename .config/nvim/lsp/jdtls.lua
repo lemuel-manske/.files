@@ -1,12 +1,18 @@
 local bundles = {}
 
+local mason = vim.fn.stdpath("data") .. "/mason/packages"
+
 vim.list_extend(bundles, vim.split(
-  vim.fn.glob("~/.local/share/nvim/mason/packages/java-test/extension/server/*.jar"),
+  vim.fn.glob(
+    mason .. "/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*.jar"
+  ),
   "\n"
 ))
 
 vim.list_extend(bundles, vim.split(
-  vim.fn.glob("~/.local/share/nvim/mason/packages/java-debug-adapter/extension/server/*.jar"),
+  vim.fn.glob(
+    mason .. "/java-test/extension/server/com.microsoft.java.test.runner-*.jar"
+  ),
   "\n"
 ))
 
@@ -70,9 +76,5 @@ return {
     },
   },
 
-  init_options = { bundles = bundles },
-
-  on_attach = function(client, bufnr)
-    print("jdtls is ready for buffer " .. bufnr)
-  end
+  init_options = { bundles = bundles }
 }

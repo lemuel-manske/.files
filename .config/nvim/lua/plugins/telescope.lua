@@ -43,7 +43,6 @@ return {
         find_files = {
           previewer = false,
           hidden = true,
-          no_ignore = false,
         },
         buffers = {
           previewer = false,
