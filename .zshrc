@@ -42,6 +42,10 @@ setopt HIST_APPEND
 
 source ~/.aliases
 
+if [ -f ~/.hidden_variables ]; then
+  source ~/.hidden_variables
+fi
+
 export EDITOR="nvim"
 
 export LC_CTYPE=en_US.UTF-8
