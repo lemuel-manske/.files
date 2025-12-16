@@ -4,24 +4,32 @@ local bundles = {}
 
 local home = vim.uv.os_homedir()
 
-local function get_jdtls_config()
+local function find_project_root()
   local root_dir = require("jdtls.setup").find_root({
-    "settings.gradle", "settings.gradle.kts",
-    "gradlew", "mvnw",
-    ".git"
+    "gradlew", "mvnw"
   })
 
-  if not root_dir then
-    root_dir = vim.fn.getcwd()
-  end
+  return root_dir
+end
 
-  local project_name = vim.fn.fnamemodify(root_dir, ":p:h:t")
+local function get_workspace_name(root_dir)
+  local project_name = vim.fn.fnamemodify(root_dir, ":t")
+
+  return project_name
+end
+
+local function get_jdtls_config()
+  local root_dir = find_project_root()
+  local project_name = get_workspace_name(root_dir)
+
   local workspace_dir = vim.fn.stdpath("data") .. "/jdtls-workspace/" .. project_name
 
   local java = home .. "/.sdkman/candidates/java/current/bin/java"
 
   local jdtls_path = vim.fn.stdpath("data") .. "/mason/packages/jdtls"
   local launcher = vim.fn.glob(jdtls_path .. "/plugins/org.eclipse.equinox.launcher_*.jar")
+
+  local lombok_path = jdtls_path .. "/lombok.jar"
 
   local config_os = ({
     Linux = "config_linux",
@@ -32,22 +40,33 @@ local function get_jdtls_config()
   local config = {
     cmd = {
       java,
+
+      "-javaagent:" .. lombok_path,
       "-Declipse.application=org.eclipse.jdt.ls.core.id1",
-      "-Dosgi.bundles.defaultStartLevel=4",
       "-Declipse.product=org.eclipse.jdt.ls.core.product",
+
+      "-Dosgi.bundles.defaultStartLevel=4",
+
       "-Dlog.protocol=true",
       "-Dlog.level=ALL",
+
       "-Dfile.encoding=UTF-8",
+
       "-XX:+UseParallelGC",
       "-XX:GCTimeRatio=4",
       "-XX:AdaptiveSizePolicyWeight=90",
+
       "-Dsun.zip.disableMemoryMapping=true",
       "-Djava.import.generatesMetadataFilesAtProjectRoot=false",
+
       "-Xmx1g",
       "-Xms100m",
+
       "--add-modules=ALL-SYSTEM",
+
       "--add-opens", "java.base/java.util=ALL-UNNAMED",
       "--add-opens", "java.base/java.lang=ALL-UNNAMED",
+
       "-jar", launcher,
       "-configuration", jdtls_path .. "/" .. config_os,
       "-data", workspace_dir,
@@ -57,14 +76,6 @@ local function get_jdtls_config()
 
     settings = {
       java = {
-        import = {
-          gradle = {
-            wrapper = {
-              enabled = true
-            }
-          }
-        },
-
         completion = {
           importOrder = { "*" },
         },
@@ -80,63 +91,6 @@ local function get_jdtls_config()
           organizeImports = {
             starThreshold = 99,
             staticStarThreshold = 99,
-          },
-        },
-
-        -- Enhanced error reporting and validation
-        compile = {
-          nullAnalysis = {
-            mode = "automatic",
-          },
-        },
-
-        errors = {
-          incompleteClasspath = {
-            severity = "warning",
-          },
-        },
-
-        -- Enable verbose logging for troubleshooting
-        trace = {
-          server = "verbose",
-        },
-
-        -- Additional configuration for better error detection
-        configuration = {
-          checkProjectSettings = true,
-          updateBuildConfiguration = "automatic",
-        },
-
-        -- Maven settings for better project detection
-        maven = {
-          downloadSources = true,
-          updateSnapshots = true,
-        },
-
-        -- References and implementations
-        references = {
-          includeDecompiledSources = true,
-        },
-
-        -- Signaturehelp and hover
-        signatureHelp = {
-          enabled = true,
-          description = {
-            enabled = true,
-          },
-        },
-
-        -- Content assist
-        contentAssist = {
-          overwrite = true,
-          favoriteStaticMembers = {
-            "org.hamcrest.MatcherAssert.assertThat",
-            "org.hamcrest.Matchers.*",
-            "org.hamcrest.CoreMatchers.*",
-            "org.junit.jupiter.api.Assertions.*",
-            "java.util.Objects.requireNonNull",
-            "java.util.Objects.requireNonNullElse",
-            "org.mockito.Mockito.*"
           },
         },
       },
@@ -171,7 +125,7 @@ local function get_jdtls_config()
       }
     ),
 
-    on_attach = function(client, bufnr)
+    on_attach = function(_, bufnr)
       local telescope = require("telescope.builtin")
 
       local opts = {
@@ -225,16 +179,6 @@ local function get_jdtls_config()
       })
 
       vim.keymap.set("n", "<leader>rn", function()
-        local ui_input = vim.ui.input
-
-        vim.ui.input = function(_, on_confirm)
-          if opts.prompt == "New name: " then
-            opts.default = ""
-          end
-          ui_input(opts, on_confirm)
-          vim.ui.input = ui_input
-        end
-
         vim.lsp.buf.rename()
       end, {
         desc = "Rename Symbol",
@@ -286,7 +230,3 @@ local function get_jdtls_config()
 end
 
 jdtls.start_or_attach(get_jdtls_config())
-
-vim.api.nvim_create_user_command("JdtlsRestart", function()
-  vim.cmd("LspRestart jdtls")
-end, { desc = "Restart JDTLS" })
