@@ -1,8 +1,19 @@
 local jdtls = require("jdtls")
+local lsp_utils = require("lkmliz.lsp_utils")
 
 local bundles = {}
 
 local home = vim.uv.os_homedir()
+
+local function java_on_attach(client, bufnr)
+  -- Call the base on_attach from lsp_utils
+  lsp_utils.on_attach(client, bufnr)
+  
+  -- Add Java-specific keymaps
+  vim.keymap.set("n", "<leader>oi", function()
+    jdtls.organize_imports()
+  end, { buffer = bufnr, desc = "Organize Imports" })
+end
 
 local function find_project_root()
   local root_dir = require("jdtls.setup").find_root({
@@ -125,105 +136,7 @@ local function get_jdtls_config()
       }
     ),
 
-    on_attach = function(_, bufnr)
-      local telescope = require("telescope.builtin")
-
-      local opts = {
-        path_display = { "smart" },
-        fname_width = 60,
-        trim_text = true,
-        previewer = true,
-      }
-
-      vim.keymap.set("n", "<leader>gD", vim.lsp.buf.declaration, {
-        desc = "Go to Declaration",
-        buffer = bufnr
-      })
-
-      vim.keymap.set("n", "<leader>gd", function()
-        telescope.lsp_definitions(opts)
-      end, {
-        desc = "Go to Definition",
-        buffer = bufnr
-      })
-
-      vim.keymap.set("n", "<leader>gi", function()
-        telescope.lsp_implementations(opts)
-      end, {
-        desc = "Go to Implementation",
-        buffer = bufnr
-      })
-
-      vim.keymap.set("n", "<leader>gr", function()
-        telescope.lsp_references(opts)
-      end, {
-        desc = "Go to References",
-        buffer = bufnr
-      })
-
-      vim.keymap.set("n", "<leader>gt", function()
-        telescope.lsp_type_definitions(opts)
-      end, {
-        desc = "Go to Type Definition",
-        buffer = bufnr
-      })
-
-      vim.keymap.set("n", "K", vim.lsp.buf.hover, {
-        desc = "Hover Documentation",
-        buffer = bufnr
-      })
-
-      vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {
-        desc = "Code Action",
-        buffer = bufnr
-      })
-
-      vim.keymap.set("n", "<leader>rn", function()
-        vim.lsp.buf.rename()
-      end, {
-        desc = "Rename Symbol",
-        buffer = bufnr
-      })
-
-      vim.keymap.set("n", "Q", function()
-        vim.lsp.buf.format({ async = true })
-      end, { buffer = bufnr, desc = "Format file" })
-
-      -- Java-specific keymaps
-      vim.keymap.set("n", "<leader>oi", function()
-        jdtls.organize_imports()
-      end, { buffer = bufnr, desc = "Organize Imports" })
-
-      vim.keymap.set("n", "<leader>ev", function()
-        jdtls.extract_variable()
-      end, { buffer = bufnr, desc = "Extract Variable" })
-
-      vim.keymap.set("v", "<leader>ev", function()
-        jdtls.extract_variable(true)
-      end, { buffer = bufnr, desc = "Extract Variable" })
-
-      vim.keymap.set("n", "<leader>ec", function()
-        jdtls.extract_constant()
-      end, { buffer = bufnr, desc = "Extract Constant" })
-
-      vim.keymap.set("v", "<leader>ec", function()
-        jdtls.extract_constant(true)
-      end, { buffer = bufnr, desc = "Extract Constant" })
-
-      vim.keymap.set("v", "<leader>em", function()
-        jdtls.extract_method(true)
-      end, { buffer = bufnr, desc = "Extract Method" })
-
-      vim.keymap.set("n", "<leader>tc", function()
-        jdtls.test_class()
-      end, { buffer = bufnr, desc = "Test Class" })
-
-      vim.keymap.set("n", "<leader>tm", function()
-        jdtls.test_nearest_method()
-      end, { buffer = bufnr, desc = "Test Method" })
-
-      vim.notify("JDTLS attached successfully", vim.log.levels.INFO, { title = "JDTLS" })
-    end,
+    on_attach = java_on_attach,
   }
 
   return config
