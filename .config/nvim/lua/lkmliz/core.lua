@@ -115,7 +115,20 @@ keymap.set("n", "<C-p>", ":bprevious<CR>", { desc = "Return to previous buffer",
 
 
 -- Open file explorer
-keymap.set("n", "<leader>se", ":Explore<CR>", { desc = "Open file explorer" })
+local function open_curr_file_on_explorer()
+  local file_path = vim.fn.expand("%:p")
+
+  if file_path == "" then
+    vim.cmd("Ex")
+  else
+    vim.cmd("Ex " .. vim.fn.fnamemodify(file_path, ":h"))
+    vim.cmd("normal! gg")
+    local filename = vim.fn.fnamemodify(file_path, ":t")
+    vim.cmd("/" .. filename)
+  end
+end
+
+keymap.set("n", "<leader>se", open_curr_file_on_explorer, { desc = "Open file explorer" })
 
 
 -- Reload Neovim configuration

@@ -4,9 +4,8 @@ return {
   init = function()
     vim.g.copilot_enabled = false
 
-    -- always use nvm's latest node version
-    local node = vim.fn.system("bash -lc 'nvm which node'"):gsub("%s+$", "")
+    local home = vim.uv.os_homedir()
 
-    vim.g.copilot_node_command = node
+    vim.g.copilot_node_command = home .. "/.nvm/versions/node/v24.12.0/bin/node"
   end
 }
