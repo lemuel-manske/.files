@@ -1,14 +1,12 @@
 local jdtls = require("jdtls")
 local lsp_utils = require("lkmliz.lsp_utils")
 
-local bundles = {}
-
 local home = vim.uv.os_homedir()
 
 local function java_on_attach(client, bufnr)
   -- Call the base on_attach from lsp_utils
   lsp_utils.on_attach(client, bufnr)
-  
+
   -- Add Java-specific keymaps
   vim.keymap.set("n", "<leader>oi", function()
     jdtls.organize_imports()
@@ -37,8 +35,16 @@ local function get_jdtls_config()
 
   local java = home .. "/.sdkman/candidates/java/current/bin/java"
 
+  local packages = vim.fn.stdpath("data") .. "/mason/packages"
+
   local jdtls_path = vim.fn.stdpath("data") .. "/mason/packages/jdtls"
   local launcher = vim.fn.glob(jdtls_path .. "/plugins/org.eclipse.equinox.launcher_*.jar")
+
+  local java_debug = vim.fn.glob(packages .. "/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*.jar", 1)
+
+  local bundles = {
+    java_debug,
+  }
 
   local lombok_path = jdtls_path .. "/lombok.jar"
 

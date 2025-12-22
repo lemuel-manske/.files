@@ -23,6 +23,55 @@ vim.lsp.config("lua_ls", {
   }
 })
 
+
+local attach_debugger = function()
+  local dap = require("dap")
+
+  dap.configurations.java = {
+    {
+      name = "Attach",
+      type = "java",
+      request = "attach",
+      hostName = "127.0.0.1",
+      port = 5005,
+      skipFiles = { "<stdlib>" },
+    },
+  }
+
+  dap.continue();
+end
+
+local toggle_breakpoint = function()
+  local dap = require("dap")
+
+  dap.toggle_breakpoint();
+end
+
+local open_repl = function()
+  local dap = require("dap")
+
+  dap.repl.open();
+end
+
+local step_into = function()
+  local dap = require("dap")
+
+  dap.step_into();
+end
+
+local step_over = function()
+  local dap = require("dap")
+
+  dap.step_over();
+end
+
+vim.keymap.set("n", "<leader>da", attach_debugger, { desc = "Attach Java Debugger" })
+vim.keymap.set("n", "<leader>de", open_repl, { desc = "Open REPL" })
+
+vim.keymap.set("n", "<leader>db", toggle_breakpoint, { desc = "Toggle breakpoint" })
+vim.keymap.set("n", "<leader>di", step_into, { desc = "Step Into" })
+vim.keymap.set("n", "<leader>di", step_over, { desc = "Step Over" })
+
 vim.diagnostic.config({
   underline = true,
 
