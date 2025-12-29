@@ -2,7 +2,7 @@ return {
   "github/copilot.vim",
 
   init = function()
-    vim.g.copilot_enabled = false
+    vim.g.copilot_enabled = true
 
     local home = vim.uv.os_homedir()
 

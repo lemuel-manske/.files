@@ -145,6 +145,8 @@ keymap.set("v", "<C-s>", ":sort<CR>")
 keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move selection up", remap = false })
 keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move selection down", remap = false })
 
+keymap.set("x", "<leader>[", "c{}<Esc>P", { noremap = true })
+
 
 -- Create and open a new file in the current file's directory
 keymap.set('n', '<leader>nf', function()
@@ -198,3 +200,44 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     end
   end,
 })
+
+-- clean jdtls workspace and restart
+vim.api.nvim_create_user_command("JdtClean", function()
+  local jdtls_ok, jdtls_setup = pcall(require, "jdtls.setup")
+  if not jdtls_ok then
+    vim.notify("jdtls is not available", vim.log.levels.ERROR)
+    return
+  end
+
+  local root_dir = jdtls_setup.find_root({ "gradlew", "mvnw" })
+  if not root_dir then
+    vim.notify("Could not find project root", vim.log.levels.ERROR)
+    return
+  end
+
+  local project_name = vim.fn.fnamemodify(root_dir, ":t")
+  local workspace_dir = vim.fn.stdpath("data") .. "/jdtls-workspace/" .. project_name
+
+  -- Confirm before deletion
+  local confirm = vim.fn.confirm(
+    string.format("Remove workspace directory for '%s'?", project_name),
+    "&Yes\n&No",
+    2
+  )
+
+  if confirm ~= 1 then
+    vim.notify("Cancelled", vim.log.levels.INFO)
+    return
+  end
+
+  -- Remove the workspace directory
+  vim.fn.system(string.format("rm -rf '%s'", workspace_dir))
+
+  if vim.v.shell_error == 0 then
+    vim.notify(string.format("Removed workspace: %s", project_name), vim.log.levels.INFO)
+    -- Restart jdtls
+    vim.cmd("JdtRestart")
+  else
+    vim.notify("Failed to remove workspace directory", vim.log.levels.ERROR)
+  end
+end, { desc = "Clean jdtls workspace and restart" })
