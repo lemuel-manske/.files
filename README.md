@@ -63,4 +63,10 @@ sudo apt install -y \
 
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
 nvm install --lts
+npm install --global yarn
+
+curl -s "https://get.sdkman.io" | bash
+
+# opencode
+npm i -g opencode-ai
 ```
