@@ -71,7 +71,13 @@ M.on_attach = function(_, bufnr)
   })
 
   vim.keymap.set("n", "Q", function()
-    vim.lsp.buf.format({ async = true })
+    local conform = require("conform")
+
+    conform.format({
+      lsp_fallback = true,
+      async = false,
+      timeout_ms = 3000,
+    })
   end, { buffer = bufnr, desc = "Format file" })
 end
 

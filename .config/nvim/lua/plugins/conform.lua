@@ -22,14 +22,26 @@ return {
         lua = { "stylua" },
         go = { "gofmt", "goimports" },
       },
-    })
 
-    vim.keymap.set({ "n", "v" }, "Q", function()
-      conform.format({
-        lsp_fallback = true,
-        async = false,
-        timeout_ms = 1000,
-      })
-    end, { desc = "Format file or range (in visual mode)" })
+      formatters = {
+        eslint_d = {
+          command = "eslint_d",
+          args = { "--fix", "--stdin", "--stdin-filename", "$FILENAME" },
+          stdin = true,
+        },
+
+        stylua = {
+          command = "stylua",
+          args = {
+            "--indent-type",
+            "Spaces",
+            "--indent-width",
+            "2",
+            "-",
+          },
+          stdin = true,
+        },
+      },
+    })
   end,
 }
