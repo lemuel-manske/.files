@@ -3,13 +3,28 @@
   "theme": "opencode",
   "model": "anthropic/claude-sonnet-4-5",
   "autoupdate": true,
+  "tui": {
+    "scroll_speed": 2
+  },
+  "agent": {
+    "pr-review": {
+      "description": "Reviews code for quality, best practices, and potential issues using GitHub API tools",
+      "mode": "subagent",
+      "temperature": 0.1,
+      "prompt": "You are a code reviewer focused on:\n- Code quality and best practices\n- Potential bugs and edge cases\n- Performance implications\n- Security considerations\n- Type safety and correctness\n- Adherence to project conventions\n\nProvide constructive feedback without making direct changes. Review the code thoroughly and identify any issues or improvements.",
+      "tools": {
+        "edit": false,
+        "write": false,
+      }
+    }
+  },
   "mcp": {
     "github": {
-      "type": "remote",
-      "url": "https://api.githubcopilot.com/mcp/",
+      "type": "local",
       "enabled": true,
-      "headers": {
-        "Authorization": "Bearer {env:GITHUB_TOKEN}"
+      "command": [ "npx", "-y", "@modelcontextprotocol/server-github@latest" ],
+      "environment": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "{env:GITHUB_TOKEN}"
       }
     }
   }
