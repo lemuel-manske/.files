@@ -48,4 +48,4 @@ fi
 
 export EDITOR="nvim"
 
-export PATH=/home/lkmliz/.opencode/bin:$PATH:/opt/nvim
+export PATH=~/.opencode/bin:/opt/nvim:/opt/obsidian:$PATH

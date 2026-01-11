@@ -1,10 +1,7 @@
 .hidden_*
 
-.config/Electron
-.config/github-copilot
-.config/go
-.config/jgit
+.config
 
-.emacs.d
-!.emacs.d/init.el
+!.config/nvim/*
+!.config/opencode/*
 
