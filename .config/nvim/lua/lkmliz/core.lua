@@ -112,6 +112,7 @@ keymap.set("n", "<C-Left>", ":vertical resize -2<CR>", { desc = "Decrease window
 keymap.set("n", "<C-b>", ":bw<CR>", { desc = "Closes current buffer", remap = false })
 keymap.set("n", "<C-n>", ":bnext<CR>", { desc = "Go to next buffer", remap = false })
 keymap.set("n", "<C-p>", ":bprevious<CR>", { desc = "Return to previous buffer", remap = false })
+keymap.set("n", "<leader>cb", ":%bd|e#|bd#<CR>", { desc = "Close all buffers except current", remap = false })
 
 
 -- Open file explorer
