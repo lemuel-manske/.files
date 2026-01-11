@@ -19,12 +19,12 @@ opt.hlsearch = false
 opt.incsearch = true
 
 -- formatting
-opt.tabstop = 2       -- 2 spcs for tabs
-opt.shiftwidth = 2    -- 2 spcs for indent width
-opt.expandtab = true  -- expand tab to spcs
+opt.tabstop = 2 -- 2 spcs for tabs
+opt.shiftwidth = 2 -- 2 spcs for indent width
+opt.expandtab = true -- expand tab to spcs
 opt.autoindent = true -- copy indent from curr line when starting new one
 
-opt.scrolloff = 8     -- scroll when reach 10
+opt.scrolloff = 8 -- scroll when reach 10
 opt.wrap = false
 
 opt.showmode = false -- dont show mode on status line
@@ -35,29 +35,29 @@ opt.termguicolors = true
 opt.background = "dark"
 
 -- line numbers
-opt.number = true             -- show line numbers
-opt.numberwidth = 2           -- line numbers width
-opt.cursorline = true         -- show line on cursor pos
-opt.relativenumber = true     -- show line numbers relative to cursor
+opt.number = true -- show line numbers
+opt.numberwidth = 2 -- line numbers width
+opt.cursorline = true -- show line on cursor pos
+opt.relativenumber = true -- show line numbers relative to cursor
 
-opt.mouse = "a"               -- use mouse
+opt.mouse = "a" -- use mouse
 
 opt.clipboard = "unnamedplus" -- use system cliboard
 
-opt.undofile = true           -- keep undo file
+opt.undofile = true -- keep undo file
 
-opt.signcolumn = "yes"        -- sign column on left so that text doesn't shift
-opt.colorcolumn = "80"        -- sign column on left so that text doesn't shift
+opt.signcolumn = "yes" -- sign column on left so that text doesn't shift
+opt.colorcolumn = "80" -- sign column on left so that text doesn't shift
 
-opt.splitright = true         -- vsplit right
-opt.splitbelow = true         -- split below
+opt.splitright = true -- vsplit right
+opt.splitbelow = true -- split below
 
-opt.swapfile = false          -- no swap file
-opt.autowrite = false         -- no autosave
+opt.swapfile = false -- no swap file
+opt.autowrite = false -- no autosave
 
-opt.updatetime = 300          -- faster completion
+opt.updatetime = 300 -- faster completion
 
-opt.errorbells = false        -- no error bells
+opt.errorbells = false -- no error bells
 
 -- lists
 opt.list = true
@@ -72,7 +72,6 @@ opt.listchars = {
 }
 
 opt.inccommand = "split"
-
 
 -- KEYMAPS
 
@@ -114,7 +113,6 @@ keymap.set("n", "<C-n>", ":bnext<CR>", { desc = "Go to next buffer", remap = fal
 keymap.set("n", "<C-p>", ":bprevious<CR>", { desc = "Return to previous buffer", remap = false })
 keymap.set("n", "<leader>cb", ":%bd|e#|bd#<CR>", { desc = "Close all buffers except current", remap = false })
 
-
 -- Open file explorer
 local function open_curr_file_on_explorer()
   local file_path = vim.fn.expand("%:p")
@@ -131,13 +129,11 @@ end
 
 keymap.set("n", "<leader>se", open_curr_file_on_explorer, { desc = "Open file explorer" })
 
-
 -- Reload Neovim configuration
 keymap.set("n", "<leader>rr", ":source ~/.config/nvim/init.lua<CR>", { desc = "Reload Neovim config" })
 
-
 -- Replace all instances of highlighted words Keymaps
-keymap.set("v", "<leader>r", "\"hy:%s/<C-r>h//g<left><left>")
+keymap.set("v", "<leader>r", '"hy:%s/<C-r>h//g<left><left>')
 
 -- Sort highlighted text in visual mode
 keymap.set("v", "<C-s>", ":sort<CR>")
@@ -148,30 +144,26 @@ keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move selection down", rem
 
 keymap.set("x", "<leader>[", "c{}<Esc>P", { noremap = true })
 
-
 -- Create and open a new file in the current file's directory
-keymap.set('n', '<leader>nf', function()
+keymap.set("n", "<leader>nf", function()
   local dir = vim.fn.expand("%:h")
   local name = vim.fn.input("filename: ")
 
-  if name == "" then return end
+  if name == "" then
+    return
+  end
   vim.cmd("edit " .. dir .. "/" .. name)
 end)
-
 
 -- Show line diagnostic in a floating window
 keymap.set("n", "<leader><leader>", function()
   vim.diagnostic.open_float({ scope = "line" })
 end, { desc = "Show line diagnostic" })
 
-
 -- Remove ^M characters from the current buffer
 keymap.set("n", "<leader>mm", function()
   vim.cmd([[ %s/\r//g ]])
 end, { desc = "Remove ^M characters" })
-
-
-
 
 -- AUTO COMMANDS
 
@@ -195,11 +187,16 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   group = main_group,
 
   callback = function()
-    local dir = vim.fn.expand('<afile>:p:h')
+    local dir = vim.fn.expand("<afile>:p:h")
     if vim.fn.isdirectory(dir) == 0 then
-      vim.fn.mkdir(dir, 'p')
+      vim.fn.mkdir(dir, "p")
     end
   end,
+})
+
+-- :W fallbacks to :w
+vim.api.nvim_create_user_command("W", "write", {
+  desc = "Write",
 })
 
 -- clean jdtls workspace and restart
@@ -220,11 +217,7 @@ vim.api.nvim_create_user_command("JdtClean", function()
   local workspace_dir = vim.fn.stdpath("data") .. "/jdtls-workspace/" .. project_name
 
   -- Confirm before deletion
-  local confirm = vim.fn.confirm(
-    string.format("Remove workspace directory for '%s'?", project_name),
-    "&Yes\n&No",
-    2
-  )
+  local confirm = vim.fn.confirm(string.format("Remove workspace directory for '%s'?", project_name), "&Yes\n&No", 2)
 
   if confirm ~= 1 then
     vim.notify("Cancelled", vim.log.levels.INFO)
