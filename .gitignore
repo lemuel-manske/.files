@@ -1,0 +1,13 @@
+.hidden_*
+
+.config/*
+
+!.config/nvim/
+!.config/nvim/**
+
+!.config/opencode/
+!.config/opencode/**
+
+!.config/tmuxinator/
+!.config/tmuxinator/**
+

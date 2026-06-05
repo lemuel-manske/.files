@@ -1,0 +1,71 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+
+  "plugin": ["superpowers@git+https://github.com/obra/superpowers.git"],
+
+  "provider": {
+    "github-copilot": {
+      "options": {
+        "timeout": 1200000,
+        "chunkTimeout": 600000
+      }
+    },
+    "opencode": {
+      "options": {
+        "timeout": 1200000,
+        "chunkTimeout": 600000
+      }
+    }
+  },
+
+  "autoupdate": true,
+
+  "agent": {
+    "pr-review": {
+      "description": "Reviews code for quality, best practices, and potential issues using GitHub API tools",
+      "mode": "subagent",
+      "temperature": 0.1,
+      "prompt": "You are a code reviewer focused on: Code quality and best practices; Potential bugs and edge cases; Performance implications; Security considerations; Type safety and correctness; Adherence to project conventions. Provide constructive feedback without making direct changes. Review the code thoroughly and identify any issues or improvements.",
+      "tools": {
+        "edit": false,
+        "write": false
+      }
+    },
+
+    "pr-intention": {
+      "description": "Determines the intent of a pull request (USE GITHUB MCP AND AZURE DEVOPS MCP)",
+      "mode": "subagent",
+      "temperature": 0.1,
+      "prompt": "You are an assistant that determines the intent of a pull request. Analyze the changes and provide a concise summary of the purpose and goals of the PR based on the code changes, commit messages, and any available context. You use Github MCP and Azure DevOps MCP to gather information about the PR, such as changed files, commit history, and related work items. Your response should focus on identifying the main objectives of the PR, such as bug fixes, feature additions, refactoring, or documentation updates.",
+      "tools": {
+        "edit": false,
+        "write": false
+      }
+    }
+  },
+
+  "mcp": {
+    "local-github": {
+      "type": "local",
+      "enabled": true,
+      "command": [ "npx", "-y", "@modelcontextprotocol/server-github@latest" ],
+      "environment": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "{env:GITHUB_TOKEN}"
+      }
+    },
+    "local-oracle": {
+      "type": "local",
+      "enabled": true,
+      "command": [ "sql", "{env:DB_CONN}", "-mcp" ]
+    },
+    "local-ado": {
+      "type": "local",
+      "enabled": true,
+      "command": [ "npx", "-y", "--force", "@azure-devops/mcp@next", "emr-cm", "-d", "core", "work", "work-items", "search" ],
+      "environment": {
+        "HTTP_PROXY": "{env:HTTP_PROXY}",
+        "HTTPS_PROXY": "{env:HTTPS_PROXY}"
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+name: <%= @settings["project_name"] %>
+root: <%= @settings["project_path"] %>
+
+windows:
+  - main:
+      layout: main-vertical
+      panes:
+        - nvim .
+        - opencode .
+
