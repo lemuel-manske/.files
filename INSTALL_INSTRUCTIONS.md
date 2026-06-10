@@ -95,6 +95,10 @@ git clone https://github.com/tree-sitter/tree-sitter-python /tmp/ts-python
 cd /tmp/ts-python && tree-sitter build --output ~/.local/share/nvim/site/parser/python.so
 rm -rf /tmp/ts-python
 
+
+# pyenv
+curl -fsSL https://pyenv.run | bash
+
 # finalize
 source ~/.zshrc
 ```

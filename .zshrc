@@ -59,5 +59,8 @@ export PATH=$HOME/.devcontainers/bin:$PATH
 export PATH=/usr/local/go/bin:$PATH
 export PATH=$HOME/go/bin:$PATH
 
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+
 export NODE_OPTIONS=--max-old-space-size=8192
 export NODE_EXTRA_CA_CERTS=/etc/ssl/certs/ca-certificates.crt
