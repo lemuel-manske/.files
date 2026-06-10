@@ -10,10 +10,9 @@
   register: sqlcl_stat
 
 - name: Download SQLcl
-  ansible.builtin.get_url:
-    url: https://download.oracle.com/otn_software/java/sqldeveloper/sqlcl-latest.zip
-    dest: /tmp/sqlcl.zip
-  become: true
+  ansible.builtin.shell:
+    cmd: curl -fsSL https://download.oracle.com/otn_software/java/sqldeveloper/sqlcl-latest.zip -o /tmp/sqlcl.zip
+    creates: /tmp/sqlcl.zip
   when: not sqlcl_stat.stat.exists
 
 - name: Unzip SQLcl to /opt
