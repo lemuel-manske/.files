@@ -1,0 +1,6 @@
+---
+- name: Stow dotfiles
+  ansible.builtin.shell:
+    cmd: stow --adopt . && git checkout .
+    chdir: "{{ ansible_env.HOME }}/.files"
+  changed_when: false

@@ -1,0 +1,10 @@
+---
+- name: Install go tools
+  ansible.builtin.shell:
+    cmd: go install {{ item.package }}
+    creates: "{{ ansible_env.HOME }}/go/bin/{{ item.binary }}"
+  loop: "{{ go_tools }}"
+  environment:
+    HOME: "{{ ansible_env.HOME }}"
+    GOPATH: "{{ ansible_env.HOME }}/go"
+    PATH: "/usr/local/go/bin:/usr/bin:{{ ansible_env.PATH }}"

@@ -1,0 +1,4 @@
+---
+- name: Docker role placeholder
+  ansible.builtin.debug:
+    msg: "Docker role is a placeholder. No tasks to run."

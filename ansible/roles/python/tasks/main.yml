@@ -1,0 +1,11 @@
+---
+- name: Install pyenv
+  ansible.builtin.shell:
+    cmd: curl -fsSL https://pyenv.run | bash
+    creates: "{{ ansible_env.HOME }}/.pyenv/bin/pyenv"
+
+- name: Install pip packages
+  ansible.builtin.pip:
+    name: "{{ pip_packages }}"
+    extra_args: --user
+    state: present

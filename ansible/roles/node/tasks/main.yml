@@ -1,0 +1,25 @@
+---
+- name: Install NVM
+  ansible.builtin.shell:
+    cmd: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v{{ nvm_version }}/install.sh | bash
+    creates: "{{ ansible_env.HOME }}/.nvm/nvm.sh"
+
+- name: Install Node.js LTS
+  ansible.builtin.shell:
+    cmd: |
+      export NVM_DIR="{{ ansible_env.HOME }}/.nvm"
+      [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+      nvm install --lts
+    executable: /bin/bash
+  register: node_install
+  changed_when: "'already installed' not in node_install.stdout"
+
+- name: Install npm globals
+  ansible.builtin.shell:
+    cmd: |
+      export NVM_DIR="{{ ansible_env.HOME }}/.nvm"
+      [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+      npm install -g {{ item }}
+    executable: /bin/bash
+  loop: "{{ npm_globals }}"
+  changed_when: false

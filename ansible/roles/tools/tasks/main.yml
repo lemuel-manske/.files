@@ -1,0 +1,38 @@
+---
+- name: Install opencode
+  ansible.builtin.shell:
+    cmd: curl -fsSL https://opencode.ai/install | bash
+    creates: "{{ ansible_env.HOME }}/.opencode/bin/opencode"
+
+- name: Check if SQLcl is installed
+  ansible.builtin.stat:
+    path: /opt/sqlcl/bin/sql
+  register: sqlcl_stat
+
+- name: Download SQLcl
+  ansible.builtin.get_url:
+    url: https://download.oracle.com/otn_software/java/sqldeveloper/sqlcl-latest.zip
+    dest: /tmp/sqlcl.zip
+  become: true
+  when: not sqlcl_stat.stat.exists
+
+- name: Unzip SQLcl to /opt
+  ansible.builtin.unarchive:
+    src: /tmp/sqlcl.zip
+    dest: /opt
+    remote_src: true
+  become: true
+  when: not sqlcl_stat.stat.exists
+
+- name: Remove SQLcl zip
+  ansible.builtin.file:
+    path: /tmp/sqlcl.zip
+    state: absent
+  become: true
+  when: not sqlcl_stat.stat.exists
+
+- name: Install devcontainers CLI
+  ansible.builtin.shell:
+    cmd: |
+      curl -fsSL https://raw.githubusercontent.com/devcontainers/cli/main/scripts/install.sh | sh
+    creates: "{{ ansible_env.HOME }}/.devcontainers/bin/devcontainer"

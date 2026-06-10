@@ -1,0 +1,27 @@
+---
+- name: Create /opt/nvim directory
+  ansible.builtin.file:
+    path: /opt/nvim
+    state: directory
+    mode: "0755"
+  become: true
+
+- name: Check if neovim binary exists
+  ansible.builtin.stat:
+    path: /opt/nvim/nvim
+  register: nvim_stat
+
+- name: Download neovim AppImage
+  ansible.builtin.get_url:
+    url: https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.appimage
+    dest: /opt/nvim/nvim
+    mode: "0755"
+  become: true
+  when: not nvim_stat.stat.exists
+
+- name: Symlink neovim to /usr/local/bin
+  ansible.builtin.file:
+    src: /opt/nvim/nvim
+    dest: /usr/local/bin/nvim
+    state: link
+  become: true

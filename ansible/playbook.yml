@@ -1,0 +1,18 @@
+---
+- name: Provision WSL development environment
+  hosts: local
+  become: false
+
+  roles:
+    - { role: common,   tags: [common] }
+    - { role: zsh,      tags: [zsh] }
+    - { role: dotfiles, tags: [dotfiles] }
+    - { role: git,      tags: [git] }
+    - { role: neovim,   tags: [neovim] }
+    - { role: go,       tags: [go] }
+    - { role: node,     tags: [node] }
+    - { role: java,     tags: [java] }
+    - { role: python,   tags: [python] }
+    - { role: tools,    tags: [tools] }
+    - { role: docker,   tags: [docker] }
+    - { role: wsl,      tags: [wsl] }

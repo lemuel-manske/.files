@@ -1,0 +1,36 @@
+---
+- name: Set git user.name
+  community.general.git_config:
+    name: user.name
+    value: "{{ git_user_name }}"
+    scope: global
+
+- name: Set git user.email
+  community.general.git_config:
+    name: user.email
+    value: "{{ git_user_email }}"
+    scope: global
+
+- name: Set git pull.rebase
+  community.general.git_config:
+    name: pull.rebase
+    value: "true"
+    scope: global
+
+- name: Set git branch.sort
+  community.general.git_config:
+    name: branch.sort
+    value: -committerdate
+    scope: global
+
+- name: Set git diff.colorMoved
+  community.general.git_config:
+    name: diff.colorMoved
+    value: zebra
+    scope: global
+
+- name: Set git pager.branch
+  community.general.git_config:
+    name: pager.branch
+    value: "false"
+    scope: global

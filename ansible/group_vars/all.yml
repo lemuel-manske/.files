@@ -1,0 +1,54 @@
+---
+git_user_name: lemuel-manske
+git_user_email: lemuelkauemanskede.liz@philips.com
+
+java_version: 21-tem
+nvm_version: "0.40.3"
+neovim_version: latest
+
+apt_packages:
+  - xclip
+  - tmux
+  - curl
+  - wget
+  - git
+  - git-lfs
+  - zsh
+  - zip
+  - unzip
+  - tar
+  - gzip
+  - libfuse2
+  - xdg-utils
+  - fzf
+  - gcc
+  - g++
+  - ripgrep
+  - fd-find
+  - make
+  - cmake
+  - python3
+  - python3-pip
+  - python3-venv
+  - stow
+  - golang-go
+
+npm_globals:
+  - neovim
+  - yarn
+  - typescript
+  - typescript-language-server
+  - pyright
+  - prettier
+  - eslint_d
+  - tree-sitter-cli
+
+pip_packages:
+  - pynvim
+  - debugpy
+
+go_tools:
+  - package: golang.org/x/tools/gopls@latest
+    binary: gopls
+  - package: golang.org/x/tools/cmd/goimports@latest
+    binary: goimports

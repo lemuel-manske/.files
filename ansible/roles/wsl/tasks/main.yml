@@ -1,0 +1,4 @@
+---
+- name: WSL role placeholder
+  ansible.builtin.debug:
+    msg: "WSL role has no tasks to run yet."

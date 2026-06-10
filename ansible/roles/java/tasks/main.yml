@@ -1,0 +1,23 @@
+---
+- name: Install SDKMAN
+  ansible.builtin.shell:
+    cmd: curl -s "https://get.sdkman.io" | bash
+    creates: "{{ ansible_env.HOME }}/.sdkman/bin/sdkman-init.sh"
+  environment:
+    SDKMAN_AUTO_ANSWER: "true"
+
+- name: Check if Java is installed
+  ansible.builtin.stat:
+    path: "{{ ansible_env.HOME }}/.sdkman/candidates/java/{{ java_version }}"
+  register: java_stat
+
+- name: Install Java via SDKMAN
+  ansible.builtin.shell:
+    cmd: |
+      export SDKMAN_DIR="{{ ansible_env.HOME }}/.sdkman"
+      source "$SDKMAN_DIR/bin/sdkman-init.sh"
+      sdk install java {{ java_version }}
+    executable: /bin/bash
+  environment:
+    SDKMAN_AUTO_ANSWER: "true"
+  when: not java_stat.stat.exists
