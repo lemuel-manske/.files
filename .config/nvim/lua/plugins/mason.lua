@@ -6,10 +6,10 @@ return {
         icons = {
           package_installed = "INSTALLED",
           package_pending = "PENDING",
-          package_uninstalled = "UNINSTALLED"
-        }
-      }
-    }
+          package_uninstalled = "UNINSTALLED",
+        },
+      },
+    },
   },
 
   {
@@ -17,9 +17,17 @@ return {
     dependencies = { "mason-org/mason.nvim" },
     opts = {
       ensure_installed = {
+        "eslint_d",
         "gopls",
+        "java-debug-adapter",
+        "java-test",
+        "jdtls",
+        "jsonls",
         "lua_ls",
+        "prettier",
         "pyright",
+        "pyright",
+        "stylua",
         "ts_ls",
       },
     },
@@ -29,7 +37,7 @@ return {
     "mfussenegger/nvim-jdtls",
 
     dependencies = {
-      "mfussenegger/nvim-dap"
-    }
-  }
+      "mfussenegger/nvim-dap",
+    },
+  },
 }
