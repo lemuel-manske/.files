@@ -1,0 +1,35 @@
+---
+- name: Ensure /etc/apt/keyrings exists
+  become: true
+  ansible.builtin.file:
+    path: /etc/apt/keyrings
+    state: directory
+    mode: "0755"
+
+- name: Download GitHub CLI GPG key
+  become: true
+  ansible.builtin.get_url:
+    url: https://cli.github.com/packages/githubcli-archive-keyring.gpg
+    dest: /etc/apt/keyrings/githubcli-archive-keyring.gpg
+    mode: "0644"
+
+# dpkg --print-architecture returns 'amd64'; ansible_architecture returns 'x86_64'.
+# The apt repo URL expects the dpkg format.
+- name: Get system architecture
+  ansible.builtin.command: dpkg --print-architecture
+  register: dpkg_arch
+  changed_when: false
+
+- name: Add GitHub CLI apt repository
+  become: true
+  ansible.builtin.apt_repository:
+    repo: "deb [arch={{ dpkg_arch.stdout }} signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main"
+    filename: github-cli
+    state: present
+
+- name: Install GitHub CLI
+  become: true
+  ansible.builtin.apt:
+    name: gh
+    state: present
+    update_cache: true
