@@ -7,5 +7,5 @@
 - name: Install pip packages
   ansible.builtin.pip:
     name: "{{ pip_packages }}"
-    extra_args: --user
+    extra_args: --user --break-system-packages
     state: present
