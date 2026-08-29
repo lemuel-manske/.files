@@ -77,6 +77,9 @@ opt.listchars = {
 
 opt.inccommand = "split"
 
+-- enable reading of local .vimrc and .exrc files
+vim.o.exrc = true
+
 -- KEYMAPS
 
 local keymap = vim.keymap

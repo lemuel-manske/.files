@@ -307,9 +307,7 @@ M.on_attach = function(_, bufnr)
     buffer = bufnr,
   })
 
-  vim.keymap.set("n", "<leader>gd", function()
-    telescope.lsp_definitions(opts)
-  end, {
+  vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, {
     desc = "Go to Definition",
     buffer = bufnr,
   })
