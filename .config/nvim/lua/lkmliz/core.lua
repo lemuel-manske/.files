@@ -126,12 +126,20 @@ local function open_curr_file_on_explorer()
 
   if file_path == "" then
     vim.cmd("Ex")
-  else
-    vim.cmd("Ex " .. vim.fn.fnamemodify(file_path, ":h"))
-    vim.cmd("normal! gg")
-    local filename = vim.fn.fnamemodify(file_path, ":t")
-    vim.fn.search("\\V" .. vim.fn.escape(filename, "\\") .. "\\$", "w")
+    return
   end
+
+  local dir = vim.fn.fnamemodify(file_path, ":h")
+  local filename = vim.fn.fnamemodify(file_path, ":t")
+
+  vim.cmd("Ex " .. vim.fn.fnameescape(dir))
+
+  vim.schedule(function()
+    vim.cmd("normal! gg")
+
+    local pattern = "\\V" .. vim.fn.escape(filename, "\\")
+    vim.fn.search(pattern, "w")
+  end)
 end
 
 keymap.set("n", "<leader>se", open_curr_file_on_explorer, { desc = "Open file explorer" })
