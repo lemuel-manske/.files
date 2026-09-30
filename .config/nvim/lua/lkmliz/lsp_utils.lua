@@ -302,12 +302,46 @@ M.on_attach = function(_, bufnr)
     previewer = true,
   }
 
-  vim.keymap.set("n", "<leader>gD", vim.lsp.buf.declaration, {
+  vim.keymap.set("n", "<leader>gD", function()
+    vim.lsp.buf.declaration({
+      on_list = function(options)
+        local item = options.items[1]
+
+        if not item then
+          vim.notify("Declaration not found", vim.log.levels.WARN)
+          return
+        end
+
+        vim.cmd("tabedit " .. vim.fn.fnameescape(item.filename))
+        vim.api.nvim_win_set_cursor(0, {
+          item.lnum,
+          item.col - 1,
+        })
+      end,
+    })
+  end, {
     desc = "Go to Declaration",
     buffer = bufnr,
   })
 
-  vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, {
+  vim.keymap.set("n", "<leader>gd", function()
+    vim.lsp.buf.definition({
+      on_list = function(options)
+        local item = options.items[1]
+
+        if not item then
+          vim.notify("Definition not found", vim.log.levels.WARN)
+          return
+        end
+
+        vim.cmd("tabedit " .. vim.fn.fnameescape(item.filename))
+        vim.api.nvim_win_set_cursor(0, {
+          item.lnum,
+          item.col - 1,
+        })
+      end,
+    })
+  end, {
     desc = "Go to Definition",
     buffer = bufnr,
   })
