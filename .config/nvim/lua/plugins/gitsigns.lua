@@ -20,5 +20,14 @@ return {
         untracked = { text = "┆" },
       },
     })
+
+    local gitsigns = require("gitsigns")
+
+    local keymap = vim.keymap.set
+
+
+    keymap("n", "<leader>ggd", gitsigns.preview_hunk, {
+        desc = "Git diff under cursor",
+    })
   end,
 }
