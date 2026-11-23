@@ -52,6 +52,8 @@ export PATH=/opt/nvim:/opt/obsidian:$PATH
 
 export PATH=/opt/sqlcl/current/bin:$PATH
 
+export PATH=/home/lkmliz/.opencode/bin:$PATH
+
 export PATH=/usr/local/go/bin:$PATH
 export PATH=$HOME/go/bin:$PATH
 

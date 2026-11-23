@@ -1,8 +1,6 @@
 {
   "$schema": "https://opencode.ai/config.json",
 
-  "plugin": ["superpowers@git+https://github.com/obra/superpowers.git"],
-
   "provider": {
     "github-copilot": {
       "options": {
@@ -40,22 +38,6 @@
       "command": [ "npx", "-y", "@modelcontextprotocol/server-github@latest" ],
       "environment": {
         "GITHUB_PERSONAL_ACCESS_TOKEN": "{env:GITHUB_TOKEN}"
-      }
-    },
-
-    "local-oracle": {
-      "type": "local",
-      "enabled": true,
-      "command": [ "sql", "{env:DB_CONN}", "-mcp" ]
-    },
-
-    "local-ado": {
-      "type": "local",
-      "enabled": true,
-      "command": [ "npx", "-y", "--force", "@azure-devops/mcp@next", "emr-cm", "-d", "core", "work", "work-items", "search" ],
-      "environment": {
-        "HTTP_PROXY": "{env:HTTP_PROXY}",
-        "HTTPS_PROXY": "{env:HTTPS_PROXY}"
       }
     }
   }
