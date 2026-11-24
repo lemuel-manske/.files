@@ -62,3 +62,6 @@ export PATH="$PYENV_ROOT/bin:$PATH"
 
 export NODE_OPTIONS=--max-old-space-size=8192
 export NODE_EXTRA_CA_CERTS=/etc/ssl/certs/ca-certificates.crt
+
+# opencode
+export PATH=/home/lkmliz/.opencode/bin:$PATH
